@@ -11,18 +11,26 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
+    networks:
+      - app-network
 
   frontend:
     build:
       context: ./frontend
       dockerfile: DockerFile
     ports:
-      - "3000:3000"
+      - "5173:5173"
     volumes:
       - ./frontend:/app
       - /app/node_modules
     environment:
       - NODE_ENV=development
-    # Wait for the backend to start before launching the frontend
+      - REACT_APP_BACKEND_URL=http://backend:5000
     depends_on:
       - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
