@@ -42,7 +42,7 @@ jobs:
       
       - name: Test full application with docker-compose
         run: |
-          docker-compose up -d
+          docker compose up -d
           sleep 10 # Czekaj na uruchomienie usług
           curl -f http://localhost:5000
           curl -f http://localhost:5173
