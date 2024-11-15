@@ -44,7 +44,11 @@ jobs:
         run: |
           docker compose up -d
           sleep 10 # Czekaj na uruchomienie usług
-          curl -f http://localhost:5000
+          curl -f http://localhost:5001
           curl -f http://localhost:5173
         env:
           REACT_APP_BACKEND_URL: http://backend:5000
+
+      # Tear down containers after tests
+      - name: Tear down
+        run: docker compose down
