@@ -36,9 +36,9 @@ jobs:
         run: |
           docker run --rm -p 5000:5000 backend:test node server.js & sleep 5 && curl http://localhost:5000
 
-      - name: Test frontend container
-        run: |
-          docker run --rm -p 5173:5173 frontend:test npm run dev
+      # - name: Test frontend container
+      #   run: |
+      #     docker run --rm -p 5173:5173 frontend:test npm run dev
       
       - name: Test full application with docker-compose
         run: |
