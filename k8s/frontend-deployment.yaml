@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  labels:
+    app: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: front-back-node-vite-react-typescript-tailwind-frontend:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5173  # Matches Docker Compose internal port
+        env:
+        - name: NODE_ENV
+          value: "development"
+        - name: REACT_APP_BACKEND_URL
+          value: "http://backend-service:5000"  # Kubernetes service URL for backend
